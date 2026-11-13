@@ -1,0 +1,6 @@
+# Lopez y Rosales (GPU NVIDIA). Instalar en este orden:
+#   uv pip install -r requirements-torch-gpu.txt
+#   uv pip install -r requirements-gpu.txt
+-r requirements-cpu.txt
+numba-cuda[cu13]>=0.20      # "CUDA Python": kernels propios (fase C)
+nvidia-ml-py>=12            # lecturas de GPU para comun/monitor.py (módulo pynvml)
