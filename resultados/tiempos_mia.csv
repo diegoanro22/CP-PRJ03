@@ -1,0 +1,16 @@
+fase,variante,dispositivo,corrida,tiempo_s,n_imagenes,workers_o_hilos,batch,epocas,hardware,fecha
+A_preparacion,secuencial,cpu,1,16.372301,17400,1,,,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T21:10:03
+A_preparacion,secuencial,cpu,2,16.629030,17400,1,,,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T21:10:19
+A_preparacion,secuencial,cpu,3,15.968652,17400,1,,,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T21:10:35
+A_preparacion,secuencial,cpu,4,16.340778,17400,1,,,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T21:10:52
+A_preparacion,secuencial,cpu,5,16.313057,17400,1,,,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T21:11:08
+T_original,cpu_1hilo,cpu,1,1573.185113,12180,1,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T22:03:25
+T_original,cpu_1hilo,cpu,2,1373.901072,12180,1,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T22:26:20
+T_original,cpu_1hilo,cpu,3,1551.789744,12180,1,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T22:52:13
+T_original,cpu_1hilo,cpu,4,1582.509656,12180,1,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T23:18:36
+T_original,cpu_1hilo,cpu,5,1515.857540,12180,1,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-13T23:43:53
+T_original,cpu_nhilos,cpu,1,844.101275,12180,8,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-14T00:13:23
+T_original,cpu_nhilos,cpu,2,847.784884,12180,8,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-14T00:27:31
+T_original,cpu_nhilos,cpu,3,825.343537,12180,8,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-14T00:41:18
+T_original,cpu_nhilos,cpu,4,792.250236,12180,8,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-14T00:54:30
+T_original,cpu_nhilos,cpu,5,787.809316,12180,8,256,4,"Intel64 Family 6 Model 140 Stepping 1, GenuineIntel (8 hilos) | sin GPU",2026-11-14T01:07:38
