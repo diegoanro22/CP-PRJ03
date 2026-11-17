@@ -1,0 +1,5 @@
+variante,nucleos_equiv,gpu_util,n_nucleos
+cpu_1hilo,1.79,8.69,20
+cpu_nhilos,19.99,0.99,20
+cuda,1.91,98.83,20
+cuda_amp,1.88,98.87,20
