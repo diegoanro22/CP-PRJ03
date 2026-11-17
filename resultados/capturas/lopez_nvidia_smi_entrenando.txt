@@ -1,0 +1,35 @@
+Mon Nov 16 23:59:19 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 596.49                 Driver Version: 596.49         CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5070 ...  WDDM  |   00000000:02:00.0  On |                  N/A |
+| N/A   62C    P4             43W /  108W |    2356MiB /   8151MiB |     99%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            4272    C+G   ...em32\ApplicationFrameHost.exe      N/A      |
+|    0   N/A  N/A            5960    C+G   ...5n1h2txyewy\TextInputHost.exe      N/A      |
+|    0   N/A  N/A            8540    C+G   C:\Windows\explorer.exe               N/A      |
+|    0   N/A  N/A            9120    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           11892    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A           14356    C+G   ...App_cw5n1h2txyewy\LockApp.exe      N/A      |
+|    0   N/A  N/A           16728    C+G   ...ntrolPanel\SystemSettings.exe      N/A      |
+|    0   N/A  N/A           17216    C+G   ...4__w2gh52qy24etm\Nahimic3.exe      N/A      |
+|    0   N/A  N/A           18164    C+G   ...y\StartMenuExperienceHost.exe      N/A      |
+|    0   N/A  N/A           19472      C   ...indows-x86_64-none\python.exe      N/A      |
+|    0   N/A  N/A           21228    C+G   ...cord\app-1.0.9268\Discord.exe      N/A      |
+|    0   N/A  N/A           22180    C+G   ...8bbwe\PhoneExperienceHost.exe      N/A      |
+|    0   N/A  N/A           27836    C+G   ..._cw5n1h2txyewy\SearchHost.exe      N/A      |
+|    0   N/A  N/A           30296    C+G   ...xyewy\ShellExperienceHost.exe      N/A      |
+|    0   N/A  N/A           32532    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           35388    C+G   ...ms\Microsoft VS Code\Code.exe      N/A      |
++-----------------------------------------------------------------------------------------+
