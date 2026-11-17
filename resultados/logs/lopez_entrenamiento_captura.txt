@@ -1,0 +1,25 @@
+torch 2.14.1+cu130 | CUDA runtime 13.0 | cuda disponible: True
+GPU: NVIDIA GeForce RTX 5070 Laptop GPU | cuDNN 92400
+variante=cuda batch=256 épocas=20 hilos CPU=1
+  epoca=1  train_loss=2.8843  train_acc=0.1556  val_loss=2.9301  val_acc=0.1360
+  epoca=2  train_loss=1.5863  train_acc=0.4856  val_loss=1.3765  val_acc=0.5709
+  epoca=3  train_loss=0.8057  train_acc=0.7291  val_loss=0.4670  val_acc=0.8651
+  epoca=4  train_loss=0.4603  train_acc=0.8455  val_loss=0.2252  val_acc=0.9421
+  epoca=5  train_loss=0.3019  train_acc=0.8989  val_loss=0.1858  val_acc=0.9506
+  epoca=6  train_loss=0.2169  train_acc=0.9305  val_loss=0.2846  val_acc=0.8889
+  epoca=7  train_loss=0.1644  train_acc=0.9486  val_loss=0.0898  val_acc=0.9674
+  epoca=8  train_loss=0.1342  train_acc=0.9580  val_loss=0.0461  val_acc=0.9870
+  epoca=9  train_loss=0.0966  train_acc=0.9713  val_loss=0.0434  val_acc=0.9885
+  epoca=10  train_loss=0.0950  train_acc=0.9701  val_loss=0.0584  val_acc=0.9805
+  epoca=11  train_loss=0.0659  train_acc=0.9810  val_loss=0.0205  val_acc=0.9950
+  epoca=12  train_loss=0.0609  train_acc=0.9828  val_loss=0.0280  val_acc=0.9912
+  epoca=13  train_loss=0.0525  train_acc=0.9836  val_loss=0.0398  val_acc=0.9854
+  epoca=14  train_loss=0.0372  train_acc=0.9898  val_loss=0.0239  val_acc=0.9923
+  epoca=15  train_loss=0.0389  train_acc=0.9887  val_loss=0.0433  val_acc=0.9835
+  epoca=16  train_loss=0.0441  train_acc=0.9880  val_loss=0.0722  val_acc=0.9739
+  epoca=17  train_loss=0.0533  train_acc=0.9836  val_loss=0.0120  val_acc=0.9973
+  epoca=18  train_loss=0.0434  train_acc=0.9870  val_loss=0.0284  val_acc=0.9923
+  epoca=19  train_loss=0.0400  train_acc=0.9874  val_loss=0.0131  val_acc=0.9977
+  epoca=20  train_loss=0.0352  train_acc=0.9893  val_loss=0.0101  val_acc=0.9969
+tiempo total: 66.20 s | transferencia H2D: 0.27 s | cómputo: 65.85 s
+test: accuracy=0.9981 f1_macro=0.9981
