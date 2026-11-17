@@ -27,20 +27,23 @@ dentro del bucle de entrenamiento solo hay matemática en GPU.
 
 ## Checklist
 
-- [ ] `python -m comun.datos_seq` una vez para tener la caché.
-- [ ] `entrenar_cuda.py` reutiliza `secuencial.cnn.CNN2` (misma arquitectura) e hiperparámetros de `comun/config.py`.
-- [ ] Cargar con `cargar_tensores(split)`: la caché en disco es NHWC (N, 64, 64, 3) y la función ya hace
+- [x] `python -m comun.datos_seq` una vez para tener la caché.
+- [x] `entrenar_cuda.py` reutiliza `secuencial.cnn.CNN2` (misma arquitectura) e hiperparámetros de `comun/config.py`.
+- [x] Cargar con `cargar_tensores(split)`: la caché en disco es NHWC (N, 64, 64, 3) y la función ya hace
       `permute(0, 3, 1, 2)`. No usar `np.load` directo sin permutar, porque `Conv2d` espera (N, 3, 64, 64).
-- [ ] **Comparación justa**: las variantes `cpu_1hilo` y `cpu_nhilos` usan **el mismo bucle y la misma caché en memoria**
+- [x] **Comparación justa**: las variantes `cpu_1hilo` y `cpu_nhilos` usan **el mismo bucle y la misma caché en memoria**
       que `cuda`; lo único que cambia es `device`. Así el speedup de B mide solo la matemática.
       (El pipeline original con JPG en cada época lo mide Mia como `T_original`.)
-- [ ] Medir con **eventos CUDA** (`torch.cuda.Event(enable_timing=True)`) tres componentes por época:
+- [x] Medir con **eventos CUDA** (`torch.cuda.Event(enable_timing=True)`) tres componentes por época:
       transferencia H2D, forward+backward+step, y total. Registrar fases `B_transferencia` y `B_computo` además de `B_entrenamiento`.
-- [ ] Barrido de batch registrado como `fase="B_barrido_batch"`, `variante="batch_<n>"`.
-- [ ] `Cronometro(cuda=True)` para el tiempo total (sincroniza la GPU).
-- [ ] 1 calentamiento + 5 corridas por variante; 4 épocas fijas (`patience` desactivado).
-- [ ] Accuracy y F1 de test con `secuencial.evaluation.evaluate_classification` (debe rondar 0.90 como el original).
-- [ ] `Monitor("lopez_<variante>_<n>")` en cada corrida + `graficar`.
-- [ ] En otra terminal durante el entrenamiento: `nvidia-smi dmon -s um -o T > resultados/logs/lopez_dmon.txt`
-      y capturas de `nvidia-smi` y `nvtop` en `resultados/capturas/`.
-- [ ] Imprimir en el log `torch.cuda.get_device_name(0)` y `torch.version.cuda` (evidencia de que se usó la GPU).
+- [x] Barrido de batch registrado como `fase="B_barrido_batch"`, `variante="batch_<n>"`.
+- [x] `Cronometro(cuda=True)` para el tiempo total (sincroniza la GPU).
+- [x] 1 calentamiento + 5 corridas por variante; 4 épocas fijas (`patience` desactivado).
+- [x] Accuracy y F1 de test con `secuencial.evaluation.evaluate_classification` (debe rondar 0.90 como el original).
+- [x] `Monitor("lopez_<variante>_<n>")` en cada corrida + `graficar`.
+- [x] Evidencia de GPU: `nvidia-smi dmon` en `resultados/logs/lopez_dmon.txt` (+ `figuras/lopez_dmon_gpu.png`) y salida de `nvidia-smi`
+      a mitad del entrenamiento en `resultados/capturas/lopez_nvidia_smi_entrenando.{txt,png}`. El `.png` es la salida real
+      renderizada como imagen, **no una captura de pantalla** (y en Windows no existe `nvtop`). Captura de pantalla real del
+      Administrador de tareas con la GPU al 100 % y la CPU al 7 %: `capturas/lopez_taskmgr_gpu_entrenando.png`.
+      Uso de CPU/GPU por variante: `figuras/lopez_uso_cpu_gpu.png`.
+- [x] Imprimir en el log `torch.cuda.get_device_name(0)` y `torch.version.cuda` (evidencia de que se usó la GPU).
