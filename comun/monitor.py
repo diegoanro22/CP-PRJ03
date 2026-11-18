@@ -41,9 +41,14 @@ class Monitor:
     def _muestra_gpu(self) -> list:
         if self._gpu is None:
             return ["", "", ""]
-        util = self._nvml.nvmlDeviceGetUtilizationRates(self._gpu)
-        mem = self._nvml.nvmlDeviceGetMemoryInfo(self._gpu)
-        temp = self._nvml.nvmlDeviceGetTemperature(self._gpu, 0)
+        try:
+            util = self._nvml.nvmlDeviceGetUtilizationRates(self._gpu)
+            mem = self._nvml.nvmlDeviceGetMemoryInfo(self._gpu)
+            temp = self._nvml.nvmlDeviceGetTemperature(self._gpu, 0)
+        except Exception:
+            # Una lectura fallida de NVML (p. ej. NVMLError_Unknown) no debe matar el
+            # hilo del monitor: esa muestra de GPU queda en blanco y se sigue midiendo.
+            return ["", "", ""]
         return [util.gpu, round(mem.used / 2**20), temp]
 
     def _bucle(self) -> None:
@@ -81,6 +86,9 @@ def graficar(ruta_csv: str | Path, salida: str | Path | None = None):
     import pandas as pd
 
     df = pd.read_csv(ruta_csv)
+    if not {"t_s", "gpu_util"}.issubset(df.columns):
+        print(f"{ruta_csv}: no es un log de comun.monitor; se omite.")
+        return None
     if len(df) < 2:
         print(f"{ruta_csv}: muy pocas muestras para graficar ({len(df)}); use un intervalo menor o una corrida más larga.")
         return None
@@ -93,10 +101,17 @@ def graficar(ruta_csv: str | Path, salida: str | Path | None = None):
     ejes[0, 0].set_title("Uso por núcleo de CPU (%)")
     fig.colorbar(im, ax=ejes[0, 0])
     if tiene_gpu:
-        ejes[1, 0].plot(df.t_s, df.gpu_util, label="GPU util %")
-        ejes[1, 0].plot(df.t_s, 100 * df.gpu_mem_mb / df.gpu_mem_mb.max(), label="memoria (rel.)")
-        ejes[1, 0].set_ylabel("%")
-        ejes[1, 0].legend()
+        ax = ejes[1, 0]
+        ax.plot(df.t_s, df.gpu_util, color="#31688e", label="GPU utilización (%)")
+        ax.set_ylim(-3, 103)
+        ax.set_ylabel("GPU utilización (%)")
+        ax2 = ax.twinx()
+        ax2.plot(df.t_s, df.gpu_mem_mb, color="#b5651d", label="GPU memoria usada (MiB)")
+        ax2.set_ylabel("memoria (MiB)")
+        ax2.set_ylim(0, max(1.0, df.gpu_mem_mb.max()) * 1.15)
+        lineas = ax.get_lines() + ax2.get_lines()
+        ax.legend(lineas, [l.get_label() for l in lineas], loc="lower right")
+        ejes[0, 0].set_title(f"Uso por núcleo de CPU (%), promedio {df[cpus].to_numpy().mean():.0f} %")
     ejes[-1, 0].set_xlabel("tiempo (s)")
     fig.tight_layout()
     salida = Path(salida or config.FIGURAS / f"monitor_{Path(ruta_csv).stem}.png")
