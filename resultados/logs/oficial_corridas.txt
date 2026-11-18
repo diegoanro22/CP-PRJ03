@@ -1,0 +1,85 @@
+=== Fase B (bench de Lopez): cuda, cuda_amp, cpu_nhilos, cpu_1hilo ===
+torch 2.14.1+cu130 | CUDA runtime 13.0 | cuda disponible: True
+GPU: NVIDIA GeForce RTX 5070 Laptop GPU | cuDNN 92400
+Aviso: no se pudo bloquear la suspensión; evite que el equipo se duerma durante el benchmark.
+cuda: pendientes [1, 2, 3, 4, 5]
+  cuda        calentamiento    31.66 s  (H2D 0.06 s, cómputo 31.06 s)  test acc=0.9257 f1=0.9256
+  cuda        corrida1         11.44 s  (H2D 0.06 s, cómputo 11.38 s)  test acc=0.9092 f1=0.9095
+  cuda        corrida2         11.34 s  (H2D 0.05 s, cómputo 11.28 s)  test acc=0.9230 f1=0.9237
+  cuda        corrida3         11.28 s  (H2D 0.05 s, cómputo 11.22 s)  test acc=0.9307 f1=0.9317
+  cuda        corrida4         11.46 s  (H2D 0.05 s, cómputo 11.40 s)  test acc=0.9330 f1=0.9337
+  cuda        corrida5         11.57 s  (H2D 0.05 s, cómputo 11.51 s)  test acc=0.8877 f1=0.8876
+cuda_amp: pendientes [1, 2, 3, 4, 5]
+  cuda_amp    calentamiento    19.80 s  (H2D 0.05 s, cómputo 19.74 s)  test acc=0.8490 f1=0.8443
+  cuda_amp    corrida1          6.57 s  (H2D 0.05 s, cómputo 6.51 s)  test acc=0.8490 f1=0.8443
+  cuda_amp    corrida2          6.61 s  (H2D 0.05 s, cómputo 6.55 s)  test acc=0.8490 f1=0.8443
+  cuda_amp    corrida3          6.60 s  (H2D 0.05 s, cómputo 6.54 s)  test acc=0.8490 f1=0.8443
+  cuda_amp    corrida4          6.57 s  (H2D 0.05 s, cómputo 6.51 s)  test acc=0.8490 f1=0.8443
+  cuda_amp    corrida5          6.55 s  (H2D 0.05 s, cómputo 6.49 s)  test acc=0.8490 f1=0.8443
+cpu_nhilos: pendientes [1, 2, 3, 4, 5]
+=== Fase B (bench de Lopez): cuda, cuda_amp, cpu_nhilos, cpu_1hilo ===
+torch 2.14.1+cu130 | CUDA runtime 13.0 | cuda disponible: True
+GPU: NVIDIA GeForce RTX 5070 Laptop GPU | cuDNN 92400
+Aviso: no se pudo bloquear la suspensión; evite que el equipo se duerma durante el benchmark.
+cuda: ya tiene 5 corridas registradas.
+cuda_amp: ya tiene 5 corridas registradas.
+cpu_nhilos: pendientes [1, 2, 3, 4, 5]
+  cpu_nhilos  calentamiento   206.18 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9126 f1=0.9118
+  cpu_nhilos  corrida1        210.58 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9126 f1=0.9118
+  cpu_nhilos  corrida2        211.83 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9126 f1=0.9118
+  cpu_nhilos  corrida3        208.36 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9126 f1=0.9118
+  cpu_nhilos  corrida4        206.39 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9126 f1=0.9118
+  cpu_nhilos  corrida5        207.78 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9126 f1=0.9118
+cpu_1hilo: pendientes [1, 2, 3, 4, 5]
+  cpu_1hilo   calentamiento  1059.27 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9425 f1=0.9427
+  cpu_1hilo   corrida1       1059.58 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9425 f1=0.9427
+  cpu_1hilo   corrida2       1059.72 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9425 f1=0.9427
+  cpu_1hilo   corrida3       1060.20 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9425 f1=0.9427
+  cpu_1hilo   corrida4       1059.46 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9425 f1=0.9427
+  cpu_1hilo   corrida5       1059.15 s  (H2D 0.00 s, cómputo 0.00 s)  test acc=0.9425 f1=0.9427
+
+Resumen B_entrenamiento (4 épocas, batch 256):
+  cuda        n=5  media=   11.42 s  desv=  0.11  cv= 1.0%  speedup vs cpu_1hilo: 92.8x
+  cuda_amp    n=5  media=    6.58 s  desv=  0.03  cv= 0.4%  speedup vs cpu_1hilo: 161.0x
+  cpu_nhilos  n=5  media=  208.99 s  desv=  2.19  cv= 1.0%  speedup vs cpu_1hilo: 5.1x
+  cpu_1hilo   n=5  media= 1059.62 s  desv=  0.39  cv= 0.0%  speedup vs cpu_1hilo: 1.0x
+
+=== T_original (bench de Mia): pipeline original en CPU ===
+T_original/cpu_nhilos (32 hilos) — calentamiento
+  tiempo: 251.132 s
+T_original/cpu_nhilos (32 hilos) — corrida 1
+  tiempo: 247.917 s
+T_original/cpu_nhilos (32 hilos) — corrida 2
+  tiempo: 246.430 s
+T_original/cpu_nhilos (32 hilos) — corrida 3
+  tiempo: 249.047 s
+T_original/cpu_nhilos (32 hilos) — corrida 4
+  tiempo: 247.482 s
+T_original/cpu_nhilos (32 hilos) — corrida 5
+  tiempo: 249.955 s
+T_original/cpu_1hilo (1 hilos) — calentamiento
+  tiempo: 1114.382 s
+T_original/cpu_1hilo (1 hilos) — corrida 1
+  tiempo: 1114.664 s
+T_original/cpu_1hilo (1 hilos) — corrida 2
+  tiempo: 1114.732 s
+T_original/cpu_1hilo (1 hilos) — corrida 3
+  tiempo: 1115.395 s
+T_original/cpu_1hilo (1 hilos) — corrida 4
+  tiempo: 1117.952 s
+T_original/cpu_1hilo (1 hilos) — corrida 5
+  tiempo: 1115.278 s
+
+Resumen de corridas medidas
+T_original/cpu_1hilo: n=5, media=1115.604 s, desv=1.352 s, CV=0.12%
+T_original/cpu_nhilos: n=5, media=248.166 s, desv=1.371 s, CV=0.55%
+
+Total: 265.5 min
+=== evidencia ===
+Fase A (CPU):
+  A_secuencial: 2 repeticiones en 21.3 s
+  A_procesos_16: 12 repeticiones en 12.8 s
+Fase C (GPU):
+  C_numba_cuda: 8 repeticiones en 13.0 s
+  C_numpy_cpu: 1 repeticiones en 47.0 s
+FIN codigo=0

@@ -1,0 +1,11 @@
+fase,variante,dispositivo,corrida,tiempo_s,n_imagenes,workers_o_hilos,batch,epocas,hardware,fecha
+T_original,cpu_nhilos,cpu,1,247.917028,12180,32,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T20:46:36
+T_original,cpu_nhilos,cpu,2,246.429662,12180,32,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T20:50:43
+T_original,cpu_nhilos,cpu,3,249.046999,12180,32,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T20:54:52
+T_original,cpu_nhilos,cpu,4,247.482016,12180,32,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T20:59:00
+T_original,cpu_nhilos,cpu,5,249.954914,12180,32,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T21:03:10
+T_original,cpu_1hilo,cpu,1,1114.664048,12180,1,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T21:40:19
+T_original,cpu_1hilo,cpu,2,1114.732063,12180,1,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T21:58:54
+T_original,cpu_1hilo,cpu,3,1115.394994,12180,1,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T22:17:30
+T_original,cpu_1hilo,cpu,4,1117.952324,12180,1,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T22:36:08
+T_original,cpu_1hilo,cpu,5,1115.278340,12180,1,256,4,AMD Ryzen 9 8940HX with Radeon Graphics (32 hilos) | NVIDIA GeForce RTX 5070 Laptop GPU,2026-11-17T22:54:43
