@@ -1,35 +1,38 @@
 # Fase C: kernels CUDA propios con Numba — Diego Rosales (pasos 4 y 5)
 
-PyTorch esconde cómo se reparten hilos, bloques y grids. Aquí se escribe a mano el forward de CNN2
-con `numba.cuda` para mostrar ese diseño (paso 4) y medirlo (paso 5). Usa `modelos/cnn2.pt`, así que no
-depende del entrenamiento de la fase B.
+Forward completo de CNN2 escrito a mano con `numba.cuda`, usando los pesos entrenados de
+`modelos/cnn2.pt`. Muestra explícitamente cómo se reparten hilos, bloques y grids (paso 4),
+algo que PyTorch esconde.
 
 ## Archivos
 
 | Archivo | Contenido |
 |---|---|
-| `DISENO.md` | Paso 4: mapeo de cada operación a hilos/bloques/grids, con diagrama |
-| `kernels.py` | `conv3x3_bn_relu`, `maxpool2x2`, `avgpool_global`, `matmul_tiled` (memoria compartida), `relu` |
-| `inferencia_numba.py` | Carga pesos, fusiona BatchNorm en la convolución, corre el forward sobre test |
-| `referencia_numpy.py` | Mismo forward en NumPy puro (CPU) para tener un "antes" |
-| `bench_kernels.py` | NumPy CPU vs Numba CUDA vs PyTorch/cuDNN, con y sin transferencias |
+| `DISENO.md` | **Paso 4**: mapeo de cada operación a hilos, bloques y grids, memoria compartida, resultados |
+| `kernels.py` | `k_normalizar`, `k_conv3x3_bn_relu` (tile 18×18 en memoria compartida), `k_maxpool2x2`, `k_avgpool_global`, `k_lineal` (tiling) |
+| `pesos.py` | Carga `cnn2.pt` y fusiona BatchNorm en los pesos de cada convolución |
+| `inferencia_numba.py` | Forward en GPU con buffers reservados una vez; validación contra PyTorch |
+| `referencia_numpy.py` | El mismo forward en NumPy (im2col + BLAS) en CPU: el "antes" |
+| `bench_kernels.py` | NumPy CPU vs Numba CUDA vs PyTorch/cuDNN, 5 corridas, y desglose por kernel con eventos CUDA |
+| `discusion_p1.md` | **Pregunta 1**: por qué los archivos van al CPU y la red al GPU |
 
-## Mapeo propuesto
+```bash
+python -m fase_c_kernels_numba.inferencia_numba   # validación
+python -m fase_c_kernels_numba.bench_kernels      # tiempos
+```
 
-| Operación | Hilo calcula | Bloque | Grid |
-|---|---|---|---|
-| Conv 3x3 + BN + ReLU | 1 píxel de salida (todos los canales de entrada × 9) | 16×16 | (⌈W/16⌉, ⌈H/16⌉, B·C_out) |
-| MaxPool 2x2 | 1 píxel de salida (máximo de 4) | 16×16 | (⌈W_out/16⌉, ⌈H_out/16⌉, B·C) |
-| AvgPool global | 1 (imagen, canal) con reducción | 256 | ⌈B·C/256⌉ |
-| Lineal (matmul) | 1 elemento de salida, tiles 16×16 en memoria compartida | 16×16 | (⌈out/16⌉, ⌈B/16⌉) |
+## Resultados (RTX 5070 Laptop, 2,610 imágenes de test, lotes de 256)
 
-Notas: CNN2 tiene Dropout (en inferencia es identidad) y BatchNorm (en inferencia es una afinidad que se
-fusiona en pesos y sesgo de la conv). Los tensores se quedan en GPU entre capas (`cuda.device_array`);
-solo hay una copia H2D al inicio y una D2H de logits al final.
+| Variante | Media (s) | Imágenes/s | Speedup vs NumPy |
+|---|---:|---:|---:|
+| `numpy_cpu` (32 hilos BLAS) | 46.31 | 56 | 1× |
+| `numba_cuda` (solo cómputo) | 1.60 | 1,636 | **29×** |
+| `numba_cuda_con_transferencias` | 1.60 | 1,628 | 29× |
+| `torch_cuda` (cuDNN, fp32) | 0.22 | 11,674 | 207× |
 
-## Checklist
-
-- [ ] `DISENO.md` con el razonamiento de cada kernel (coalescencia: el índice x del hilo recorre el ancho).
-- [ ] Validación: logits vs `secuencial.cnn.CNN2` cargado desde `cnn2.pt` (`np.allclose(atol=1e-3)`), predicciones ≥ 99.9 % iguales.
-- [ ] Bench con 5 corridas; registrar fase `C_inferencia` con variantes `numpy_cpu`, `numba_cuda`, `torch_cuda`, `numba_cuda_con_transferencias`.
-- [ ] Pregunta 1 de la discusión: `discusion_p1.md`.
+- **Corrección:** logits iguales a PyTorch (diferencia máxima 1e-5), 100 % de predicciones iguales,
+  accuracy en test 0.8977 (el mismo del Laboratorio 3).
+- Las transferencias casi no pesan: la entrada viaja como `uint8` y entre capas no hay copias.
+- Las convoluciones son el 99.4 % del tiempo; `conv7` y `conv8` (mapas de 8×8 con bloques de 16×16,
+  75 % de hilos ociosos) toman el 45 %. Análisis completo en `DISENO.md`.
+- Detalle: `resultados/rosales_kernels.csv`, `resultados/rosales_kernels_desglose.csv` y figuras `rosales_kernels_*.png`.
